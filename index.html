@@ -1,0 +1,79 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link  rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link  rel="stylesheet" type="text/css" href="css/styles.css">
+		<script src="js/angular.min.js"></script>
+		<script src="js/angular-route.min.js"></script>
+		<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+
+		<title>Exemplo AngularJS</title>
+	</head>
+
+	<body ng-app="app">
+		<div class="container" ng-controller="AdquirenteCtrl" ng-init="init()">
+
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<h1>Cadastro de Adquirente</h1><hr/>
+				</div>	
+			</div>
+
+			<div class="margin-header"></div>
+
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<form name="adquirenteForm" novalidate>
+					  	<div class="form-group">
+					    	<label>Nome adquirente</label>
+					    	<input type="text" class="form-control" name="nomeAdquirente" placeholder="Digite o nome da adquirente" ng-model="adquirente.nome" required>
+					    	<label> Two way data binding: o que está sendo digitado no campo acima já esta sendo atualizado na variável 'nome'. Por exemplo: ng-model =  {{adquirente.nome}} </label>
+					  	</div>
+					  	<div class="form-group">
+					  		<label>Bandeiras: </label>
+					  	</div>
+					  	<div class="checkbox" name="bandeiraAdquirente" ng-repeat="band in bandeiras track by $index">
+					    	<label><input id="bndCheck" type="checkbox" ng-click="addBandeira(band)" ng-model="band.selected">{{band.nome}}</label>
+					  	</div>
+					  	<div class="margin-button">
+					  		<button type="submit" class="btn btn-default center-block" ng-click="salvar()" ng-disabled="adquirenteForm.$invalid" title="Nome da adquirente é obrigatório!">Salvar</button>
+					  	</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+
+					<div class="row">
+						<div class="col-md-12">
+							<h3>Lista de Adquirentes</h3><hr/>
+						</div>	
+					</div>
+					
+					<table class="table">
+					    <thead>
+					      <tr>
+					        <th>Nome Adquirente</th>
+					        <th>Bandeiras</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					      <tr ng-repeat="adq in listaAdquirentes">
+					        <td ng-bind="adq.nome"></td>
+					        <td ng-repeat="bnd in adq.listaBandeiras">
+					        	<p class="inline-block" ng-bind="bnd.nome"></p>
+					        </td>
+					      </tr>
+					    </tbody>
+					</table>
+
+				</div>
+
+			</div>
+
+		</div>
+	</body>
+</html>
